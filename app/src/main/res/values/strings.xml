@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">House Genie</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rent_vs_buy">Rent vs Buy</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="mobno">Mobile No.</string>
+    <string name="reg_no">Reg</string>
+    <string name="buy_vs_rent_calculator">Buy vs Rent Calculator</string>
+    <string name="buy_vs_rent_description">Use this tool to calculate whether it is profitable to rent a house for yourself or should you take a loan and buy instead</string>
+    <string name="loan_details">Loan Details</string>
+    <string name="buy_home_scenario">Enter details for home buy scenario</string>
+    <string name="input_down_payment">Down Payment Amount</string>
+    <string name="input_loan_principal">Loan Amount</string>
+    <string name="buy_more_profitable">Buying a house is more profitable in this case since the cost of buying is less than cost of renting</string>
+    <string name="rent_more_profitable">Renting a house is more profitable in this case since the cost of renting is less than cost of buying</string>
+
+    <string name="house_more_profitable">Investing in house is more profitable in this case since the net returns are higher than other investment</string>
+    <string name="other_more_profitable">Investing in house is less profitable in this case since the net returns are lower than other investment</string>
+
+    <string name="cost_of_house_explanation">To understand how the cost of buying a house is calculated, consider a hypothetical scenario
+        where you sell the house at the end of your loan period. The net cost of ownership is total of emi and downpayment cost minus the sale price of house.
+        Also, the tax saved from interest payments is also adjusted from the cost of EMI.
+        \n\nSale price of house = Future value of house using the rate of appreciation
+        \n\nCost of EMI = Future value of all the EMIs paid
+        \n\nCost of down payment = Future value of the initial down payment
+        \n\nInflation rate is used to calculate the future value of the costs.
+    </string>
+    <string name="house_return_explanation">To calculate XIRR from the house investment, below factors are considered:
+        \n\n- Expected annual appreciation of the house.
+        \n\n- Loan interest rate
+        \n\n- Rental income
+        \n\n- Tax savings from loan interest payments
+        \n\nThe derivation of annualized return (XIRR) involves complex mathematical calculations.
+    </string>
+    <string name="investment_return_explanation">The rate of return from the other investment is already approximated using
+        which the future value is calculated. This can be compared directly with the returns from house investment
+    </string>
+    <string name="cost_of_rent_explanation">Cost of rent is calculated by adding all the future values of rent payments over a reference period.
+        \n\nCost of rent = Future value of all the rent payments
+        \n\nTo calculate the future value of the costs, average return of investment is used which was entered by you.
+    </string>
+    <string name="home_vs_other_investment">Home vs Other Investment</string>
+    <string name="home_vs_other_description">Use this tool to calculate to whether it is profitable to invest in a property as compared to other instrument</string>
+
+    <string-array name="investment_types">
+        <item>@string/savings_account</item>
+        <item>@string/fixed_deposit</item>
+        <item>@string/equity_fund</item>
+        <item>@string/debt_fund</item>
+        <item>@string/others</item>
+    </string-array>
+
+    <string name="savings_account">Savings Account</string>
+    <string name="fixed_deposit">Fixed Deposit</string>
+    <string name="equity_fund">Equity Fund</string>
+    <string name="debt_fund">Debt Fund</string>
+    <string name="others">Others</string>
+
+</resources>

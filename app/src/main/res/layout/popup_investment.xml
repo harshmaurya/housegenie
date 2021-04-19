@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loanDetailsCard"
+        style="@style/centreLocatorCardDesign"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusableInTouchMode="false"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/popupMainText"
+                    android:text="Annualized return (XIRR): " />
+                <TextView
+                    style="@style/popupPrimaryText"
+                    android:id="@+id/txt_popup_xirr"
+                    />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                style="@style/popupPrimaryText"
+                android:text="With this return "/>
+            <TextView
+                android:id="@+id/txt_popup_initial_investment"
+                style="@style/popupPrimaryText"
+                android:fontWeight="700"
+                android:text="$100"/>
+            <TextView
+                style="@style/popupPrimaryText"
+                android:text=" invested today"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/popupPrimaryText"
+                    android:text="will be "/>
+
+            <TextView
+                android:id="@+id/txt_popup_final_investment"
+                style="@style/popupPrimaryText"
+                android:fontWeight="700"
+                android:text="$1000"/>
+
+            <TextView
+                style="@style/popupPrimaryText"
+                android:text=" after "/>
+
+            <TextView
+                style="@style/popupPrimaryText"
+                android:id="@+id/txt_popup_term"
+                android:fontWeight="700"
+                android:text="10"/>
+            <TextView
+                style="@style/popupPrimaryText"
+                android:text=" years"/>
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_popup_description"
+                style="@style/popupDescriptionText"
+                android:layout_marginTop="40dp"
+                android:text="@string/house_return_explanation"
+                android:visibility="gone"
+                />
+            <TextView
+                android:id="@+id/txt_popup_description_simple"
+                style="@style/popupDescriptionText"
+                android:layout_marginTop="40dp"
+                android:text="@string/investment_return_explanation"
+                android:visibility="gone"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dismiss"
+                android:layout_gravity="right"
+                android:id="@+id/btnDismiss"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

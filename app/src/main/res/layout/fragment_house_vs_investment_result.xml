@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".fragments.HouseVsInvestmentResultFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@drawable/centre_background">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/centre_background">
+
+                <ImageView
+                    android:id="@+id/scale_house_win_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:src="@drawable/scales_house_over_other"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/scale_other_win_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:src="@drawable/scales_other_over_house"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollFeed"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@drawable/centre_background"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_house_more_profitable"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:textSize="@dimen/newsMoreTextSize"
+                android:text="@string/house_more_profitable"
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/txt_other_more_profitable"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:textSize="@dimen/newsMoreTextSize"
+                android:text="@string/other_more_profitable"
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/resultValueText"
+                    android:text="Returns from house investment"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/buyCard"
+                    style="@style/centreLocatorCardDesign"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView style="@style/bigAmountText"
+                            android:id="@+id/txtHouseReturns"
+                            android:text="$ 100,000,000"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView style="@style/bigAmountText"
+                                android:id="@+id/txtHouseXirr"
+                                android:textSize="20sp"
+                                android:textColor="@android:color/holo_green_dark"
+                                android:text="14%"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:layout_gravity="center_vertical"
+                                android:text=" annual return"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnShowHouseDetails"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/centre_button"
+                            android:text="Details"
+                            android:textSize="@dimen/descriptionTextSize"
+                            android:textColor="@color/whiteTextColor" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/resultValueText"
+                    android:text="Returns from other investment"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card2"
+                    style="@style/centreLocatorCardDesign"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+                        <TextView style="@style/bigAmountText"
+                            android:id="@+id/txtOtherReturn"
+                            android:textSize="20sp"
+                            android:text="$ 110,000,000"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView style="@style/bigAmountText"
+                                android:id="@+id/txtOtherXirr"
+                                android:textSize="20sp"
+                                android:textColor="@android:color/holo_green_dark"
+                                android:text="14%"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:layout_gravity="center_vertical"
+                                android:text=" annual return"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnShowOtherDetails"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/centre_button"
+                            android:text="Details"
+                            android:textSize="@dimen/descriptionTextSize"
+                            android:textColor="@color/whiteTextColor" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+
+            <Button
+                android:layout_marginTop="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCalculateAgain"
+                android:layout_gravity="center"
+                android:text="Calculate Again"/>
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnHome"
+                android:layout_gravity="center"
+                android:text="Home"/>
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
