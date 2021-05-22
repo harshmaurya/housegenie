@@ -5,6 +5,7 @@ import org.decampo.xirr.Xirr;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,7 @@ public class XirrCalculator {
                 .map(cashFlow -> new Transaction(cashFlow.getAmount().doubleValue(), cashFlow.getDate()))
                 .collect(Collectors.toList());
         double xirr = Xirr.builder().withGuess(initialGuess).withTransactions(transactions).xirr();
-        return BigDecimal.valueOf(xirr*100);
+        return BigDecimal.valueOf(xirr);
     }
 
     @Nullable
@@ -56,11 +57,11 @@ public class XirrCalculator {
         List<Date> dates = new ArrayList<>();
         List<BigDecimal> amounts = new ArrayList<>();
         for (CashFlow cashflow: cashFlows) {
-            dates.add(cashflow.getDate());
+            Date date = Date.from(cashflow.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            dates.add(date);
             amounts.add(cashflow.getAmount());
         }
         Map<String, Object> xirrMap = LocalXirr.Xirr(dates, amounts);
-        BigDecimal rate = (BigDecimal) xirrMap.getOrDefault("rate", BigDecimal.ZERO);
-        return rate.multiply(BigDecimal.valueOf(100));
+        return (BigDecimal) xirrMap.getOrDefault("rate", BigDecimal.ZERO);
     }
 }

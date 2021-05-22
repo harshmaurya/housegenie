@@ -1,6 +1,8 @@
 package com.vanguard.housegenie.presenters;
 
+import com.vanguard.housegenie.contracts.HouseValueContract;
 import com.vanguard.housegenie.contracts.HouseVsOtherInvestmentContract;
+import com.vanguard.housegenie.domain.HouseValueArgs;
 import com.vanguard.housegenie.domain.HouseVsOtherInvestmentArgs;
 import com.vanguard.housegenie.domain.HouseVsOtherInvestmentResult;
 import com.vanguard.housegenie.models.HouseVsOtherInvestmentModel;
@@ -22,3 +24,5 @@ public class HouseVsOtherInvestmentPresenter implements HouseVsOtherInvestmentCo
         view.showResult(result);
     }
 }
+
+

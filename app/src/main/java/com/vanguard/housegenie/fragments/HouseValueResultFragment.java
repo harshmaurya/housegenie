@@ -1,4 +1,5 @@
 package com.vanguard.housegenie.fragments;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,21 +12,30 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import com.vanguard.housegenie.R;
-import com.vanguard.housegenie.domain.HouseVsOtherInvestmentResult;
+import com.vanguard.housegenie.domain.HouseValueResult;
 import org.jetbrains.annotations.NotNull;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.vanguard.housegenie.utils.FinUtils.convertToCurrencyFormat;
 import static com.vanguard.housegenie.utils.FinUtils.convertToRateFormat;
 
-public class HouseVsInvestmentResultFragment extends Fragment {
+public class HouseValueResultFragment extends Fragment {
+    private HouseValueResult result;
 
-    private HouseVsOtherInvestmentResult result;
-
-    public HouseVsInvestmentResultFragment() {
+    public HouseValueResultFragment() {
         // Required empty public constructor
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @Override
@@ -33,7 +43,7 @@ public class HouseVsInvestmentResultFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            result = HouseVsInvestmentResultFragmentArgs.fromBundle(args).getHousevsInvestmentArgs();
+            result = HouseValueResultFragmentArgs.fromBundle(args).getHouseValueResultArgs();
         }
     }
 
@@ -41,60 +51,31 @@ public class HouseVsInvestmentResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_house_vs_investment_result, container, false);
+        return inflater.inflate(R.layout.fragment_house_value_result, container, false);
     }
 
     @Override
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
 
         Button btnHouseDetails = view.findViewById(R.id.btnShowHouseDetails);
-        Button btnOtherDetails = view.findViewById(R.id.btnShowOtherDetails);
         Button calculateAgain = view.findViewById(R.id.btnCalculateAgain);
         Button home = view.findViewById(R.id.btnHome);
 
-        TextView txtHouseMoreProfitable = view.findViewById(R.id.txt_house_more_profitable);
-        TextView txtRentMoreProfitable = view.findViewById(R.id.txt_other_more_profitable);
-        ImageView houseWinImage = view.findViewById(R.id.scale_house_win_image);
-        ImageView otherWinImage = view.findViewById(R.id.scale_other_win_image);
         TextView txtHouseReturns = view.findViewById(R.id.txtHouseReturns);
-        TextView txtOtherReturns = view.findViewById(R.id.txtOtherReturn);
         TextView txtHouseXirr = view.findViewById(R.id.txtHouseXirr);
-        TextView txtOtherXirr = view.findViewById(R.id.txtOtherXirr);
 
 
         BigDecimal initialInvestment = result.getInvestedAmount();
-        int term = result.getTerm();
-
-
-        // House
+        double years = round((double)result.getTermInMonths()/12, 1);
         BigDecimal valueFromHouse = result.getReturnFromHouse();
         BigDecimal houseXirr = result.getHouseXirr();
         txtHouseReturns.setText(convertToCurrencyFormat(valueFromHouse));
         txtHouseXirr.setText(convertToRateFormat(houseXirr));
 
-
-        //Other Investment
-        BigDecimal valueFromInvestment = result.getReturnFromInvestment();
-        BigDecimal investmentXirr = result.getInvestmentXirr();
-        txtOtherReturns.setText(convertToCurrencyFormat(valueFromInvestment));
-        txtOtherXirr.setText(convertToRateFormat(investmentXirr));
-
-        if(valueFromHouse.compareTo(valueFromInvestment) > 0){
-            txtHouseMoreProfitable.setVisibility(View.VISIBLE);
-            houseWinImage.setVisibility(View.VISIBLE);
-        }
-        else {
-            txtRentMoreProfitable.setVisibility(View.VISIBLE);
-            otherWinImage.setVisibility(View.VISIBLE);
-        }
-
         btnHouseDetails.setOnClickListener((o)->{
-            ShowHouseDetailsPopup(view, term, initialInvestment, valueFromHouse, houseXirr);
+            ShowHouseDetailsPopup(view, years, initialInvestment, valueFromHouse, houseXirr);
         });
 
-        btnOtherDetails.setOnClickListener((o)->{
-            ShowOtherDetailsPopup(view, term, initialInvestment, valueFromInvestment, investmentXirr);
-        });
 
         calculateAgain.setOnClickListener((o)->{
             final NavController navController = NavHostFragment.findNavController(this);
@@ -103,7 +84,7 @@ public class HouseVsInvestmentResultFragment extends Fragment {
 
         home.setOnClickListener((o)->{
             final NavController navController = NavHostFragment.findNavController(this);
-            final NavDirections action = HouseVsInvestmentResultFragmentDirections.actionHouseVsInvestmentResultFragmentToHomeFragment();
+            final NavDirections action = HouseValueResultFragmentDirections.actionHouseValueResultFragmentToHomeFragment();
             navController.navigate(action);
         });
 
@@ -111,20 +92,11 @@ public class HouseVsInvestmentResultFragment extends Fragment {
         disclaimer.setOnClickListener(view1 -> {
             FragmentHelper.showDisclaimerPopup(view, getActivity());
         });
-    }
 
-    private void ShowOtherDetailsPopup(@NotNull View view, int term,
-                                       BigDecimal investmentInitial, BigDecimal investmentValue, BigDecimal xirr) {
-        View popupView = showPopup(view);
-
-        setPopupData(term, investmentInitial, investmentValue, xirr, popupView);
-
-        TextView txtTerm = popupView.findViewById(R.id.txt_popup_description_simple);
-        txtTerm.setVisibility(View.VISIBLE);
     }
 
 
-    private void ShowHouseDetailsPopup(@NotNull View view, int term,
+    private void ShowHouseDetailsPopup(@NotNull View view, double term,
                                        BigDecimal investmentInitial, BigDecimal investmentValue, BigDecimal xirr) {
 
         View popupView = showPopup(view);
@@ -135,7 +107,7 @@ public class HouseVsInvestmentResultFragment extends Fragment {
         txtTerm.setVisibility(View.VISIBLE);
     }
 
-    private void setPopupData(int term, BigDecimal investmentInitial, BigDecimal investmentValue, BigDecimal xirr, View popupView) {
+    private void setPopupData(double term, BigDecimal investmentInitial, BigDecimal investmentValue, BigDecimal xirr, View popupView) {
         TextView txtTerm = popupView.findViewById(R.id.txt_popup_term);
         txtTerm.setText(String.valueOf(term));
 
@@ -149,7 +121,6 @@ public class HouseVsInvestmentResultFragment extends Fragment {
         txtXirr.setText(convertToRateFormat(xirr));
     }
 
-
     @NotNull
     private View showPopup(@NotNull View view) {
         // inflate the layout of the popup window
@@ -162,8 +133,6 @@ public class HouseVsInvestmentResultFragment extends Fragment {
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         // dismiss the popup window when touched

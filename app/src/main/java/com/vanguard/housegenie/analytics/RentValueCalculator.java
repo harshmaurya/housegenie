@@ -12,16 +12,13 @@ public class RentValueCalculator {
     public BigDecimal getRentFutureValue(RentParameters rentParameters, int years, BigDecimal reinvestmentRate){
 
         BigDecimal initialRent = rentParameters.getInitialRent();
-        BigDecimal rate = rentParameters.getAnnualAppreciation()
-                .divide(BigDecimal.valueOf(100), precision);
+        BigDecimal rate = rentParameters.getAnnualAppreciation();
         BigDecimal totalFutureValue = BigDecimal.valueOf(0);
         for (int i = 1; i <= years * months; i++) {
             int periods = i / months;
             BigDecimal rent = (initialRent.multiply((BigDecimal.valueOf(1).add(rate)).pow(periods)));
-            BigDecimal avgInvestmentRate = (reinvestmentRate
-                    .divide(BigDecimal.valueOf(months), precision))
-                    .divide(BigDecimal.valueOf(100), precision);
-            BigDecimal futureValueOfRent = FinancialCalculator.futureValue(rent, avgInvestmentRate, (years*months)-i);
+            double periodInYears = ((double)(years*months - i))/months;
+            BigDecimal futureValueOfRent = FinancialCalculator.futureValue(rent, reinvestmentRate, periodInYears);
             totalFutureValue = totalFutureValue.add(futureValueOfRent);
         }
         return totalFutureValue;

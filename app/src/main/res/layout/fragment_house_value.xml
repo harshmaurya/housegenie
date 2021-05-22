@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.HouseVsOtherInvestmentFragment">
+    tools:context=".fragments.HouseValueFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -37,7 +37,7 @@
                     android:adjustViewBounds="true"
                     android:cropToPadding="true"
                     android:src="@drawable/buy_vs_rent"
-                    android:contentDescription="@string/home_vs_other_investment" />
+                    android:contentDescription="House Value Calculator" />
 
             </RelativeLayout>
 
@@ -47,7 +47,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Property Investment"/>
+                app:title="House Value Calculator"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -66,7 +66,7 @@
 
             <TextView style="@style/descriptionText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:text="@string/home_vs_other_description"
+                android:layout_height="wrap_content" android:text="@string/house_value_description"
                 android:layout_marginStart="10dp"/>
 
             <androidx.cardview.widget.CardView
@@ -85,7 +85,8 @@
                     android:padding="20dp">
 
                     <TextView style="@style/cardTitleText"
-                        android:text="Enter details for property to be invested"/>
+                        android:text="Enter property details"/>
+
 
                     <include layout="@layout/purchase_details"/>
 
@@ -95,11 +96,26 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/txtPropertyAppreciation"
+                            android:id="@+id/txtStartDate"
                             style="@style/modifiedEditText"
-                            android:hint="Expected annual property appreciation (%)"
-                            android:inputType="number"
-                            android:text="4"/>
+                            android:hint="Purchase Date"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/txtPropertyCurrentValue"
+                            style="@style/modifiedEditText"
+                            android:hint="Current value of property"
+                            android:inputType="number"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +127,7 @@
                         <EditText
                             android:id="@+id/txtRentAmount"
                             style="@style/modifiedEditText"
-                            android:hint="Expected Monthly Rental Income"
+                            android:hint="Initial Monthly Rental Income"
                             android:singleLine="true"
                             android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -134,71 +150,6 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/alternateInvestmentCard"
-                style="@style/centreLocatorCardDesign"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:focusableInTouchMode="false"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView style="@style/cardTitleText"
-                        android:text="Enter details for alternate investment"/>
-
-                    <LinearLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Investment Type: "/>
-                        <Spinner
-                            android:id="@+id/investment_type"
-                            style="@style/Widget.AppCompat.Spinner.DropDown"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/txtInvestmentNameHost">
-                            <EditText
-                                android:id="@+id/txtInvestmentName"
-                                style="@style/modifiedEditText"
-                                android:hint="Investment Name"
-                                android:singleLine="true"
-                                android:inputType="text"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-                        <EditText
-                            android:id="@+id/txtInvestmentRate"
-                            style="@style/modifiedEditText"
-                            android:hint="Expected investment return (%)"
-                            android:singleLine="true"
-                            android:inputType="number"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
                 android:id="@+id/otherDetailsCard"
                 style="@style/centreLocatorCardDesign"
                 android:layout_marginTop="10dp"
@@ -218,6 +169,7 @@
 
                     <include layout="@layout/tax_details"/>
 
+
                     <Button
                         android:id="@+id/btnCalculate"
                         android:layout_width="100dp"
@@ -232,8 +184,6 @@
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
     </androidx.core.widget.NestedScrollView>
 

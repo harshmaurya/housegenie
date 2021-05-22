@@ -9,6 +9,8 @@ import com.vanguard.housegenie.domain.HouseVsOtherInvestmentResult;
 import com.vanguard.housegenie.domain.LoanDetails;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class HouseVsOtherInvestmentModel {
 
@@ -25,9 +27,10 @@ public class HouseVsOtherInvestmentModel {
         BigDecimal houseXirr = houseValueCalculator.getXirr(args.getHouseBuyDetails(), args.getRentParameters(), args.getTaxDetails());
         BigDecimal investmentXirr = args.getInvestmentReturn();
         BigDecimal investmentAmount = args.getHouseBuyDetails().getDownPayment().add(loanDetails.getPrincipal());
-        BigDecimal valueFromInvestmentXirr = FinancialCalculator.futureValue(investmentAmount, term, investmentXirr);
-        BigDecimal valueFromHouseXirr = FinancialCalculator.futureValue(investmentAmount, term, houseXirr);
+        BigDecimal valueFromInvestmentXirr = FinancialCalculator.futureValue(investmentAmount, investmentXirr, term);
+        BigDecimal valueFromHouseXirr = FinancialCalculator.futureValue(investmentAmount, houseXirr, term);
 
         return new HouseVsOtherInvestmentResult(houseXirr, investmentXirr, term, investmentAmount, valueFromHouseXirr, valueFromInvestmentXirr);
     }
 }
+

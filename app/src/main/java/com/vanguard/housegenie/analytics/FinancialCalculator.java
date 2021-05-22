@@ -5,20 +5,15 @@ import java.math.MathContext;
 
 public class FinancialCalculator {
 
-    /**
-     * PMT function ported from Excel to Java to use BigDecimals.
-     * @param interestRate                   interest rate for the loan.
-     * @param numberOfPayments               is the total number of payments for the loan.
-     * @param principal                      is the present value; also known as the principal.
-     * @param paymentsDueAtBeginningOfPeriod payments are due at the beginning of the period.
-     * @return payment
-     * @see <a href="https://apache.googlesource.com/poi/+/4d81d34d5d566cb22f21999e653a5829cc678ed5/src/java/org/apache/poi/ss/formula/functions/FinanceLib.java#143">FincanceLib</a>
-     */
+    private static final MathContext precision = MathContext.DECIMAL32;
+
     public static BigDecimal pmt(BigDecimal interestRate,
                                  int numberOfPayments,
                                  BigDecimal principal,
                                  boolean paymentsDueAtBeginningOfPeriod) {
 
+        if(principal.equals(BigDecimal.ZERO)) return BigDecimal.ZERO;
+        if(numberOfPayments==0) return BigDecimal.ZERO;
         BigDecimal futureValue = BigDecimal.valueOf(0);
         final BigDecimal n = new BigDecimal(numberOfPayments);
         if (BigDecimal.ZERO.equals(interestRate)) {
@@ -37,14 +32,28 @@ public class FinancialCalculator {
         }
     }
 
-    public static BigDecimal futureValue(BigDecimal presentValue, BigDecimal rate, int periods){
+    public static BigDecimal futureValue(BigDecimal presentValue, BigDecimal rate, double periods){
         final BigDecimal r1 = rate.add(BigDecimal.ONE);
-        final BigDecimal pow = r1.pow(periods);
-        return presentValue.multiply(pow);
+        final double pow = Math.pow(r1.doubleValue(), periods);
+        return presentValue.multiply(BigDecimal.valueOf(pow));
     }
 
-    public static BigDecimal futureValue(BigDecimal presentValue, int periods, BigDecimal rateInPercentage){
-        BigDecimal rate = rateInPercentage.divide(BigDecimal.valueOf(100), MathContext.DECIMAL32);
-        return futureValue(presentValue,rate, periods);
+    public static BigDecimal getRate(BigDecimal presentValue, BigDecimal futureValue, double periods){
+        BigDecimal ratio = futureValue.divide(presentValue, precision);
+        double rate = Math.pow(ratio.doubleValue(), (1/periods)) - 1;
+        return BigDecimal.valueOf(rate);
+    }
+
+    // To change compounding from annual to monyhly, set periods = 12
+    public static double changeCompounding(double rate, double periods){
+        return (Math.pow((rate + 1),1/periods)-1)*periods;
+    }
+
+    public static BigDecimal toPercentageRate(BigDecimal fractionalRate){
+        return fractionalRate.multiply(BigDecimal.valueOf(100));
+    }
+
+    public static BigDecimal toFractionalRate(BigDecimal rate){
+        return rate.divide(BigDecimal.valueOf(100), precision);
     }
 }

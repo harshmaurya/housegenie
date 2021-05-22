@@ -12,3 +12,4 @@ public interface HouseVsOtherInvestmentContract {
         void calculate(HouseVsOtherInvestmentArgs args);
     }
 }
+

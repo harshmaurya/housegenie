@@ -1,13 +1,14 @@
 package com.vanguard.housegenie.analytics;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CashFlow {
     private final BigDecimal amount;
-    private final Date date;
+    private final LocalDate date;
 
-    public CashFlow(BigDecimal amount, Date date) {
+    public CashFlow(BigDecimal amount, LocalDate date) {
         this.amount = amount;
         this.date = date;
     }
@@ -16,7 +17,7 @@ public class CashFlow {
         return amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 }

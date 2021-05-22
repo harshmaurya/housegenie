@@ -9,6 +9,7 @@
     <string name="mobno">Mobile No.</string>
     <string name="reg_no">Reg</string>
     <string name="buy_vs_rent_calculator">Buy vs Rent Calculator</string>
+    <string name="house_value_description">Use this tool to calculate the returns from your existing house investment</string>
     <string name="buy_vs_rent_description">Use this tool to calculate whether it is profitable to rent a house for yourself or should you take a loan and buy instead</string>
     <string name="loan_details">Loan Details</string>
     <string name="buy_home_scenario">Enter details for home buy scenario</string>
@@ -28,6 +29,12 @@
         \n\nCost of down payment = Future value of the initial down payment
         \n\nInflation rate is used to calculate the future value of the costs.
     </string>
+    <string name="disclaimer_notice">I have tried my best to be as accurate as possible in the financial calculations.
+        However, there can be un-intentional bugs in the app. If you find any discrepancy or error please reach out at contact@harshmaurya.in
+        \n\nPlease do not make important financial decisions solely on the basis of the results shown on this app.
+        They are meant for illustrations purpose only.
+        I will not take responsibility for any loss occurred due to usage of this app.
+    </string>
     <string name="house_return_explanation">To calculate XIRR from the house investment, below factors are considered:
         \n\n- Expected annual appreciation of the house.
         \n\n- Loan interest rate
@@ -40,7 +47,7 @@
     </string>
     <string name="cost_of_rent_explanation">Cost of rent is calculated by adding all the future values of rent payments over a reference period.
         \n\nCost of rent = Future value of all the rent payments
-        \n\nTo calculate the future value of the costs, average return of investment is used which was entered by you.
+        \n\nInflation rate is used to calculate the future value of the costs.
     </string>
     <string name="home_vs_other_investment">Home vs Other Investment</string>
     <string name="home_vs_other_description">Use this tool to calculate to whether it is profitable to invest in a property as compared to other instrument</string>
@@ -58,5 +65,11 @@
     <string name="equity_fund">Equity Fund</string>
     <string name="debt_fund">Debt Fund</string>
     <string name="others">Others</string>
+    <string name="rent_buy_intro">Are you living on rent? Do you want to check if it is profitable to continue in rent
+    or buying a house is more beneficial?</string>
+    <string name="house_vs_others_into">Do you plan to invest in property but not sure if it will fetch better returns than
+    other investment categories? Find out here</string>
+    <string name="house_value_intro">Do you have an existing property and want to calculate the returns it has given till now?
+    Check it out here</string>
 
 </resources>

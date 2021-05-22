@@ -8,10 +8,10 @@ public class HouseBuyDetails {
     private final LoanDetails loanDetails;
     private final BigDecimal houseAppreciationRate;
 
-    public HouseBuyDetails(BigDecimal downPayment, LoanDetails loanDetails, BigDecimal houseAppreciationRate) {
+    public HouseBuyDetails(BigDecimal downPayment, LoanDetails loanDetails, BigDecimal annualHouseAppreciation) {
         this.downPayment = downPayment;
         this.loanDetails = loanDetails;
-        this.houseAppreciationRate = houseAppreciationRate;
+        this.houseAppreciationRate = annualHouseAppreciation;
     }
 
     public BigDecimal getDownPayment(){
@@ -26,3 +26,4 @@ public class HouseBuyDetails {
         return houseAppreciationRate;
     }
 }
+

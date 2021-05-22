@@ -102,6 +102,11 @@ public class RentvsBuyResultFragment extends Fragment {
             navController.navigate(action);
         });
 
+        Button disclaimer = view.findViewById(R.id.btnDisclaimer);
+        disclaimer.setOnClickListener(view1 -> {
+            FragmentHelper.showDisclaimerPopup(view, getActivity());
+        });
+
     }
 
     private void ShowRentDetailsPopup(@NotNull View view, int term,

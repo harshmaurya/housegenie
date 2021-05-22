@@ -19,9 +19,12 @@ import org.jetbrains.annotations.NotNull;
 import java.math.BigDecimal;
 import com.vanguard.housegenie.utils.*;
 
+import static com.vanguard.housegenie.analytics.FinancialCalculator.toFractionalRate;
+
 public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.View {
 
     private final RentVsBuyPresenter presenter;
+    private final int defaultTerm = 10;
 
     public RentVsBuyFragment() {
         presenter = new RentVsBuyPresenter(this);
@@ -43,17 +46,21 @@ public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.Vie
     @Override
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
 
+        TaxDetailsFetcher taxDetailsFetcher = TaxDetailFragment.SetupTaxView(view, getContext());
+        PurchaseDetailsFetcher purchaseDetailsFetcher = PurchaseDetailsFragment.SetupPurchaseView(view, getContext());
         Button rentvsBuy = view.findViewById(R.id.btnCalculate);
         rentvsBuy.setOnClickListener(view1 ->
                 {
-                    HouseBuyDetails houseValueDetails = getHouseValueDetails(view);
+                    PurchaseDetails purchaseDetails = purchaseDetailsFetcher.getPurchaseDetails();
                     RentParameters rentParameters = getRentParameters(view);
-                    TaxDetails taxDetails = getInvestorDetails(view);
+                    TaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
                     BigDecimal inflationRate = getReInvestmentDetails(view);
-                    if(houseValueDetails==null || rentParameters==null || taxDetails ==null){
+                    if(purchaseDetails==null || rentParameters==null || taxDetails ==null){
                         showErrorMessage();
                         return;
                     }
+                    HouseBuyDetails houseValueDetails = new HouseBuyDetails(purchaseDetails.getDownPayment(), purchaseDetails.getLoanDetails()
+                            ,getHouseAppreciation(view));
                     presenter.calculate(new RentVsBuyArgs(houseValueDetails, rentParameters, taxDetails, inflationRate));
                 });
     }
@@ -70,23 +77,9 @@ public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.Vie
             return null;
         }
         BigDecimal avgInvestmentReturn = new BigDecimal(avgInvestmentRateString);
-        return avgInvestmentReturn;
+        return toFractionalRate(avgInvestmentReturn);
     }
 
-
-    private TaxDetails getInvestorDetails(@NotNull View view) {
-        EditText txtTaxRate = view.findViewById(R.id.txtTaxRate);
-
-        String taxRateString = txtTaxRate.getText().toString();
-
-        if(StringUtils.isNullOrEmpty(taxRateString)){
-            return null;
-        }
-
-        BigDecimal taxRate = new BigDecimal(taxRateString);
-
-        return new TaxDetails(taxRate);
-    }
 
     private RentParameters getRentParameters(@NotNull View view) {
         EditText txtRent = view.findViewById(R.id.txtRentAmount);
@@ -103,36 +96,14 @@ public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.Vie
         BigDecimal rent = new BigDecimal(rentString);
         BigDecimal rentAppreciation = new BigDecimal(rentAppreciationString);
 
-        return new RentParameters(rent,rentAppreciation);
+        return new RentParameters(rent,toFractionalRate(rentAppreciation));
     }
 
-    private HouseBuyDetails getHouseValueDetails(@NotNull View view) {
-        EditText txtDownPayment = view.findViewById(R.id.txtDownPayment);
-        EditText txtLoanPrincipal = view.findViewById(R.id.txtLoanPrincipal);
-        EditText txtLoanTerm = view.findViewById(R.id.txtLoanTerm);
-        EditText txtLoanInterest = view.findViewById(R.id.txtLoanInterest);
+    private BigDecimal getHouseAppreciation(@NotNull View view) {
         EditText houseAppreciation = view.findViewById(R.id.txtPropertyAppreciation);
-
-        String downPaymentString = txtDownPayment.getText().toString();
-        String principalString = txtLoanPrincipal.getText().toString();
-        String interestString = txtLoanInterest.getText().toString();
-        String loanTermString = txtLoanTerm.getText().toString();
         String appreciationString = houseAppreciation.getText().toString();
-
-        if(StringUtils.isNullOrEmpty(downPaymentString) || StringUtils.isNullOrEmpty(principalString)
-            || StringUtils.isNullOrEmpty(interestString) || StringUtils.isNullOrEmpty(loanTermString)
-            || StringUtils.isNullOrEmpty(appreciationString)){
-            return null;
-        }
-
-        BigDecimal downPayment = new BigDecimal(downPaymentString);
-        BigDecimal principal = new BigDecimal(principalString);
-        BigDecimal interest = new BigDecimal(interestString);
-        int term = Integer.parseInt(loanTermString);
         BigDecimal appreciation = new BigDecimal(appreciationString);
-
-        LoanDetails loan = new LoanDetails(principal, term, interest);
-        return new HouseBuyDetails(downPayment, loan, appreciation);
+        return toFractionalRate(appreciation);
     }
 
     @Override

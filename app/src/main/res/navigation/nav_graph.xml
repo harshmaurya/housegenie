@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_homeFragment_to_houseVsOtherInvestmentFragment"
             app:destination="@id/houseVsOtherInvestmentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_houseValueFragment"
+            app:destination="@id/houseValueFragment" />
     </fragment>
     <fragment
         android:id="@+id/rentVsBuyFragment"
@@ -58,5 +61,26 @@
         <action
             android:id="@+id/action_houseVsInvestmentResultFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/houseValueFragment"
+        android:name="com.vanguard.housegenie.fragments.HouseValueFragment"
+        android:label="fragment_house_value"
+        tools:layout="@layout/fragment_house_value" >
+        <action
+            android:id="@+id/action_houseValueFragment_to_houseValueResultFragment"
+            app:destination="@id/houseValueResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/houseValueResultFragment"
+        android:name="com.vanguard.housegenie.fragments.HouseValueResultFragment"
+        android:label="fragment_house_value_result"
+        tools:layout="@layout/fragment_house_value_result" >
+        <action
+            android:id="@+id/action_houseValueResultFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="houseValueResultArgs"
+            app:argType="com.vanguard.housegenie.domain.HouseValueResult" />
     </fragment>
 </navigation>

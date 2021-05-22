@@ -11,10 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import com.vanguard.housegenie.R;
-import com.vanguard.housegenie.contracts.SelectionContract;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -51,5 +48,14 @@ public class HomeFragment extends Fragment {
         Button houseVsOthers = view.findViewById(R.id.btnHomeVsOthers);
         final NavDirections action2 = HomeFragmentDirections.actionHomeFragmentToHouseVsOtherInvestmentFragment();
         houseVsOthers.setOnClickListener(view1 -> navController.navigate(action2));
+
+        Button houseValue = view.findViewById(R.id.btnHouseValue);
+        final NavDirections action3 = HomeFragmentDirections.actionHomeFragmentToHouseValueFragment();
+        houseValue.setOnClickListener(view1 -> navController.navigate(action3));
+
+        Button disclaimer = view.findViewById(R.id.btnDisclaimer);
+        disclaimer.setOnClickListener(view1 -> {
+            FragmentHelper.showDisclaimerPopup(view, getActivity());
+        });
     }
 }

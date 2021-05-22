@@ -1,19 +1,21 @@
 package com.vanguard.housegenie.domain;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-public class HouseVsOtherInvestmentArgs {
+public class HouseValueArgs {
+
     private final HouseBuyDetails houseBuyDetails;
     private final RentParameters rentParameters;
     private final TaxDetails taxDetails;
-    private final BigDecimal investmentReturn;
+    private final LocalDate startDate;
 
-    public HouseVsOtherInvestmentArgs(HouseBuyDetails houseBuyDetails, RentParameters rentParameters,
-                                      TaxDetails taxDetails, BigDecimal investmentReturn) {
+    public HouseValueArgs(HouseBuyDetails houseBuyDetails, RentParameters rentParameters,
+                          TaxDetails taxDetails, LocalDate startDate) {
         this.houseBuyDetails = houseBuyDetails;
         this.rentParameters = rentParameters;
         this.taxDetails = taxDetails;
-        this.investmentReturn = investmentReturn;
+        this.startDate = startDate;
     }
 
     public RentParameters getRentParameters() {
@@ -28,8 +30,7 @@ public class HouseVsOtherInvestmentArgs {
         return taxDetails;
     }
 
-    public BigDecimal getInvestmentReturn() {
-        return investmentReturn;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 }
-

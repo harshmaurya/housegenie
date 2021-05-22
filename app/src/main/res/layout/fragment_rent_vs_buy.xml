@@ -87,64 +87,7 @@
                     <TextView style="@style/cardTitleText"
                         android:text="@string/buy_home_scenario"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/txtDownPayment"
-                            style="@style/modifiedEditText"
-                            android:hint="@string/input_down_payment"
-                            android:singleLine="true"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/txtLoanPrincipal"
-                            style="@style/modifiedEditText"
-                            android:ems="10"
-                            android:hint="@string/input_loan_principal"
-                            android:inputType="number"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/txtLoanTerm"
-                            style="@style/modifiedEditText"
-                            android:hint="Loan Term (Years)"
-                            android:inputType="number" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/txtLoanInterest"
-                            style="@style/modifiedEditText"
-                            android:hint="Loan Interest Rate"
-                            android:inputType="number"
-                            android:text="7"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                    <include layout="@layout/purchase_details"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -205,7 +148,8 @@
                             style="@style/modifiedEditText"
                             android:hint="Annual rent increment (%)"
                             android:singleLine="true"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            android:text="5"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
@@ -240,27 +184,10 @@
                             android:hint="Inflation rate (%)"
                             android:singleLine="true"
                             android:inputType="number"
-                            android:text="5.5"/>
+                            android:text="5"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/txtTaxRate"
-                            style="@style/modifiedEditText"
-                            android:hint="Income Tax rate"
-                            android:singleLine="true"
-                            android:inputType="number"
-                            android:text="30"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/txtResult"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                    <include layout="@layout/tax_details"/>
 
                     <Button
                         android:id="@+id/btnCalculate"
