@@ -99,7 +99,7 @@
                             style="@style/modifiedEditText"
                             android:hint="Property appreciation rate (%)"
                             android:inputType="number"
-                            android:text="5"/>
+                            android:text="4"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -184,7 +184,7 @@
                             android:hint="Inflation rate (%)"
                             android:singleLine="true"
                             android:inputType="number"
-                            android:text="5"/>
+                            android:text="6"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <include layout="@layout/tax_details"/>
