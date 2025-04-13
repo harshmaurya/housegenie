@@ -24,7 +24,8 @@ public class HouseVsOtherInvestmentModel {
 
         LoanDetails loanDetails = args.getHouseBuyDetails().getLoanDetails();
         int term = loanDetails.getTerm();
-        BigDecimal houseXirr = houseValueCalculator.getXirr(args.getHouseBuyDetails(), args.getRentParameters(), args.getTaxDetails());
+        BigDecimal houseXirr = houseValueCalculator.getXirr(args.getHouseBuyDetails(), args.getRentParameters(),
+                args.getTaxDetails(), args.getInflationRate());
         BigDecimal investmentXirr = args.getInvestmentReturn();
         BigDecimal investmentAmount = args.getHouseBuyDetails().getDownPayment().add(loanDetails.getPrincipal());
         BigDecimal valueFromInvestmentXirr = FinancialCalculator.futureValue(investmentAmount, investmentXirr, term);

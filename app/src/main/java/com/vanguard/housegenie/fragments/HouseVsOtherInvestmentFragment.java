@@ -71,15 +71,17 @@ public class HouseVsOtherInvestmentFragment extends Fragment implements HouseVsO
         {
             RentParameters rentParameters = getRentParameters(view);
             PurchaseDetails purchaseDetails = purchaseDetailsFetcher.getPurchaseDetails();
-            TaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
+            ITaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
             BigDecimal investmentReturn = getInvestmentDetails(view);
             if(purchaseDetails==null || rentParameters==null || taxDetails ==null){
                 showErrorMessage();
                 return;
             }
+            BigDecimal inflationRate = getInflationRate(view);
             HouseBuyDetails houseValueDetails = new HouseBuyDetails(purchaseDetails.getDownPayment(), purchaseDetails.getLoanDetails()
-                    ,getHouseAppreciation(view));
-            HouseVsOtherInvestmentArgs args = new HouseVsOtherInvestmentArgs(houseValueDetails, rentParameters, taxDetails, investmentReturn);
+                    ,getHouseAppreciation(view), purchaseDetails.getMaintenance());
+            HouseVsOtherInvestmentArgs args = new HouseVsOtherInvestmentArgs(houseValueDetails, rentParameters, taxDetails,
+                    investmentReturn, inflationRate);
             presenter.calculate(args);
         });
     }
@@ -88,6 +90,17 @@ public class HouseVsOtherInvestmentFragment extends Fragment implements HouseVsO
     private BigDecimal getInvestmentDetails(@NotNull View view){
 
         EditText txtAvgInvestmentReturn = view.findViewById(R.id.txtInvestmentRate);
+        String avgInvestmentRateString = txtAvgInvestmentReturn.getText().toString();
+        if(StringUtils.isNullOrEmpty(avgInvestmentRateString)){
+            return null;
+        }
+        BigDecimal avgInvestmentReturn = new BigDecimal(avgInvestmentRateString);
+        return toFractionalRate(avgInvestmentReturn);
+    }
+
+    private BigDecimal getInflationRate(@NotNull View view){
+
+        EditText txtAvgInvestmentReturn = view.findViewById(R.id.txtInflationRate);
         String avgInvestmentRateString = txtAvgInvestmentReturn.getText().toString();
         if(StringUtils.isNullOrEmpty(avgInvestmentRateString)){
             return null;

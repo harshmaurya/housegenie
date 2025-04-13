@@ -7,15 +7,17 @@ public class HouseValueArgs {
 
     private final HouseBuyDetails houseBuyDetails;
     private final RentParameters rentParameters;
-    private final TaxDetails taxDetails;
+    private final ITaxDetails taxDetails;
     private final LocalDate startDate;
+    private final BigDecimal inflationRate;
 
     public HouseValueArgs(HouseBuyDetails houseBuyDetails, RentParameters rentParameters,
-                          TaxDetails taxDetails, LocalDate startDate) {
+                          ITaxDetails taxDetails, LocalDate startDate, BigDecimal inflationRate) {
         this.houseBuyDetails = houseBuyDetails;
         this.rentParameters = rentParameters;
         this.taxDetails = taxDetails;
         this.startDate = startDate;
+        this.inflationRate = inflationRate;
     }
 
     public RentParameters getRentParameters() {
@@ -26,11 +28,15 @@ public class HouseValueArgs {
         return houseBuyDetails;
     }
 
-    public TaxDetails getTaxDetails() {
+    public ITaxDetails getTaxDetails() {
         return taxDetails;
     }
 
     public LocalDate getStartDate() {
         return startDate;
+    }
+
+    public BigDecimal getInflationRate() {
+        return inflationRate;
     }
 }

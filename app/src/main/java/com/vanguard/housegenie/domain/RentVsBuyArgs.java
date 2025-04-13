@@ -2,16 +2,15 @@ package com.vanguard.housegenie.domain;
 
 import java.math.BigDecimal;
 
-
 public class RentVsBuyArgs {
 
     private final HouseBuyDetails houseBuyDetails;
     private final RentParameters rentParameters;
-    private final TaxDetails taxDetails;
+    private final ITaxDetails taxDetails;
     private final BigDecimal inflationRate;
 
     public RentVsBuyArgs(HouseBuyDetails houseBuyDetails, RentParameters rentParameters,
-                         TaxDetails taxDetails, BigDecimal inflationRate){
+                         ITaxDetails taxDetails, BigDecimal inflationRate){
         this.houseBuyDetails = houseBuyDetails;
         this.rentParameters = rentParameters;
         this.taxDetails = taxDetails;
@@ -26,7 +25,7 @@ public class RentVsBuyArgs {
         return houseBuyDetails;
     }
 
-    public TaxDetails getTaxDetails() {
+    public ITaxDetails getTaxDetails() {
         return taxDetails;
     }
 

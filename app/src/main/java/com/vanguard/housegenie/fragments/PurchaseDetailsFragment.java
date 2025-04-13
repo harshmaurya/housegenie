@@ -6,11 +6,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import com.vanguard.housegenie.R;
-import com.vanguard.housegenie.analytics.FinancialCalculator;
 import com.vanguard.housegenie.domain.LoanDetails;
 import com.vanguard.housegenie.domain.PurchaseDetails;
-import com.vanguard.housegenie.utils.AndroidUtils;
-import com.vanguard.housegenie.utils.FinUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
@@ -36,6 +33,11 @@ public class PurchaseDetailsFragment {
         });
 
         return () -> {
+
+            EditText txtMaintenance = view.findViewById(R.id.txtMaintenance);
+            String maintenanceStr = txtMaintenance.getText().toString();
+            BigDecimal maintenance = new BigDecimal(maintenanceStr);
+
             RadioGroup radioLoan = view.findViewById(R.id.radioGroupLoan);
             int checkedId = radioLoan.getCheckedRadioButtonId();
             if(checkedId == R.id.radioLoanDisable){
@@ -44,7 +46,8 @@ public class PurchaseDetailsFragment {
                 String cashPaymentStr = txtCashPayment.getText().toString();
                 if(isNullOrEmpty(cashPaymentStr)) return null;
                 BigDecimal cashPayment = new BigDecimal(cashPaymentStr);
-                return new PurchaseDetails(cashPayment, new LoanDetails(BigDecimal.ZERO,defaultTerm,BigDecimal.ZERO));
+                return new PurchaseDetails(cashPayment,
+                        new LoanDetails(BigDecimal.ZERO,defaultTerm,BigDecimal.ZERO), maintenance);
             }
             else {
                 EditText txtDownPayment = view.findViewById(R.id.txtDownPayment);
@@ -63,7 +66,8 @@ public class PurchaseDetailsFragment {
                 BigDecimal downPayment = new BigDecimal(downPaymentString);
                 BigDecimal loanPrincipal = new BigDecimal(loanPrincipalString);
                 BigDecimal loanInterest = new BigDecimal(loanInterestString);
-                return new PurchaseDetails(downPayment, new LoanDetails(loanPrincipal,loanTerm, toFractionalRate(loanInterest)));
+                return new PurchaseDetails(downPayment,
+                        new LoanDetails(loanPrincipal,loanTerm, toFractionalRate(loanInterest)), maintenance);
             }
         };
     }

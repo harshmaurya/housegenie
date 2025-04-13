@@ -5,15 +5,17 @@ import java.math.BigDecimal;
 public class HouseVsOtherInvestmentArgs {
     private final HouseBuyDetails houseBuyDetails;
     private final RentParameters rentParameters;
-    private final TaxDetails taxDetails;
+    private final ITaxDetails taxDetails;
     private final BigDecimal investmentReturn;
+    private final BigDecimal inflationRate;
 
     public HouseVsOtherInvestmentArgs(HouseBuyDetails houseBuyDetails, RentParameters rentParameters,
-                                      TaxDetails taxDetails, BigDecimal investmentReturn) {
+                                      ITaxDetails taxDetails, BigDecimal investmentReturn, BigDecimal inflationRate) {
         this.houseBuyDetails = houseBuyDetails;
         this.rentParameters = rentParameters;
         this.taxDetails = taxDetails;
         this.investmentReturn = investmentReturn;
+        this.inflationRate = inflationRate;
     }
 
     public RentParameters getRentParameters() {
@@ -24,12 +26,16 @@ public class HouseVsOtherInvestmentArgs {
         return houseBuyDetails;
     }
 
-    public TaxDetails getTaxDetails() {
+    public ITaxDetails getTaxDetails() {
         return taxDetails;
     }
 
     public BigDecimal getInvestmentReturn() {
         return investmentReturn;
+    }
+
+    public BigDecimal getInflationRate() {
+        return inflationRate;
     }
 }
 

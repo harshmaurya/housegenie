@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.RentVsBuyFragment">
+    tools:context=".fragments.RentVsRentvestingFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -37,7 +37,7 @@
                     android:adjustViewBounds="true"
                     android:cropToPadding="true"
                     android:src="@drawable/buy_vs_rent"
-                    android:contentDescription="@string/buy_vs_rent_calculator" />
+                    android:contentDescription="@string/rentvesting_calculator" />
 
             </RelativeLayout>
 
@@ -47,7 +47,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Rent vs Buy"/>
+                app:title="Rent vs Rentvesting"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -66,7 +66,7 @@
 
             <TextView style="@style/descriptionText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:text="@string/buy_vs_rent_description"
+                android:layout_height="wrap_content" android:text="@string/rent_vesting_intro"
                 android:layout_marginStart="10dp"/>
 
             <androidx.cardview.widget.CardView
@@ -85,7 +85,7 @@
                     android:padding="20dp">
 
                     <TextView style="@style/cardTitleText"
-                        android:text="@string/buy_home_scenario"/>
+                        android:text="@string/self_living_scenario"/>
 
                     <include layout="@layout/purchase_details"/>
 
@@ -122,19 +122,19 @@
                     android:padding="20dp">
 
                     <TextView style="@style/cardTitleText"
-                        android:text="Enter details for house rent scenario"/>
+                        android:text="Enter details for RentVesting scenario"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/txtRentAmount"
-                        style="@style/modifiedEditText"
-                        android:hint="Monthly Rent"
-                        android:singleLine="true"
-                        android:inputType="number"/>
+                        <EditText
+                            android:id="@+id/txtRentAmount"
+                            style="@style/modifiedEditText"
+                            android:hint="Monthly Rent"
+                            android:singleLine="true"
+                            android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -203,9 +203,6 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

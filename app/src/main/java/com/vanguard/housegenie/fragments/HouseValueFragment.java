@@ -88,17 +88,28 @@ public class HouseValueFragment extends Fragment implements HouseValueContract.V
 
             PurchaseDetails purchaseDetails = purchaseDetailsFetcher.getPurchaseDetails();
             RentParameters rentParameters = getRentParameters(view);
-            TaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
+            ITaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
             if(purchaseDetails==null || rentParameters==null || taxDetails ==null){
                 showErrorMessage();
                 return;
             }
-
+            BigDecimal inflationRate = getInflationRate(view);
             HouseBuyDetails houseValueDetails = new HouseBuyDetails(purchaseDetails.getDownPayment(),
-                    purchaseDetails.getLoanDetails(), getHouseAppreciation(view, startDate, purchaseDetails));
-            HouseValueArgs args = new HouseValueArgs(houseValueDetails, rentParameters, taxDetails, startDate);
+                    purchaseDetails.getLoanDetails(), getHouseAppreciation(view, startDate, purchaseDetails), purchaseDetails.getMaintenance());
+            HouseValueArgs args = new HouseValueArgs(houseValueDetails, rentParameters, taxDetails, startDate, inflationRate);
             presenter.calculate(args);
         });
+    }
+
+    private BigDecimal getInflationRate(@NotNull View view){
+
+        EditText txtAvgInvestmentReturn = view.findViewById(R.id.txtInflationRate);
+        String avgInvestmentRateString = txtAvgInvestmentReturn.getText().toString();
+        if(StringUtils.isNullOrEmpty(avgInvestmentRateString)){
+            return null;
+        }
+        BigDecimal avgInvestmentReturn = new BigDecimal(avgInvestmentRateString);
+        return toFractionalRate(avgInvestmentReturn);
     }
 
     private void showErrorMessage() {

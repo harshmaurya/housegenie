@@ -63,6 +63,48 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/prefernceCard"
+                style="@style/centreLocatorCardDesign"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="10dp"
+                android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusableInTouchMode="false"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    style="@style/cardTitleText"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:text="Preferences" />
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Country: " />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown" />
+                </LinearLayout>
+            </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/personalDetailsCard"
                 style="@style/centreLocatorCardDesign"
                 android:layout_marginTop="10dp"
@@ -77,15 +119,18 @@
                     android:focusableInTouchMode="false"
                     android:orientation="vertical"
                     android:padding="20dp">
+
                     <TextView
                         style="@style/cardTitleText"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:text="Rent vs Buy Calculator"/>
+                        android:text="Rent vs Buy Calculator" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/rent_buy_intro"/>
+                        android:text="@string/rent_buy_intro" />
+
                     <Button
                         android:id="@+id/btnRentvsbuy"
                         android:layout_width="100dp"
@@ -93,8 +138,7 @@
                         android:layout_gravity="right"
                         android:background="@drawable/centre_button"
                         android:text="Start"
-                        android:textColor="@color/whiteTextColor"
-                        />
+                        android:textColor="@color/whiteTextColor" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -112,15 +156,18 @@
                     android:focusableInTouchMode="false"
                     android:orientation="vertical"
                     android:padding="20dp">
+
                     <TextView
                         style="@style/cardTitleText"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:text="Home vs Other Investment"/>
+                        android:text="Home vs Other Investment" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/house_vs_others_into"/>
+                        android:text="@string/house_vs_others_into" />
+
                     <Button
                         android:id="@+id/btnHomeVsOthers"
                         android:layout_width="100dp"
@@ -128,7 +175,7 @@
                         android:layout_gravity="right"
                         android:background="@drawable/centre_button"
                         android:text="Start"
-                        android:textColor="@color/whiteTextColor"/>
+                        android:textColor="@color/whiteTextColor" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -146,15 +193,18 @@
                     android:focusableInTouchMode="false"
                     android:orientation="vertical"
                     android:padding="20dp">
+
                     <TextView
                         style="@style/cardTitleText"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:text="Existing House Investment"/>
+                        android:text="Existing House Investment" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/house_value_intro"/>
+                        android:text="@string/house_value_intro" />
+
                     <Button
                         android:id="@+id/btnHouseValue"
                         android:layout_width="100dp"
@@ -162,21 +212,13 @@
                         android:layout_gravity="right"
                         android:background="@drawable/centre_button"
                         android:text="Start"
-                        android:textColor="@color/whiteTextColor"/>
+                        android:textColor="@color/whiteTextColor" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/btnDisclaimer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click here for important disclaimer"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/border_bottom"/>
+            <include layout="@layout/footer" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
     </androidx.core.widget.NestedScrollView>

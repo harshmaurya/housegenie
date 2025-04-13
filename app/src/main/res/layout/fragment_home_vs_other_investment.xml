@@ -216,6 +216,20 @@
                     <TextView style="@style/cardTitleText"
                         android:text="Enter other details"/>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/txtInflationRate"
+                            style="@style/modifiedEditText"
+                            android:hint="@string/inflation_rate"
+                            android:singleLine="true"
+                            android:inputType="number"
+                            android:text="6"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <include layout="@layout/tax_details"/>
 
                     <Button

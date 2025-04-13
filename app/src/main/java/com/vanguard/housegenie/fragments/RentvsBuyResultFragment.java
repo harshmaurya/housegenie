@@ -70,7 +70,9 @@ public class RentvsBuyResultFragment extends Fragment {
         BigDecimal emiCost = houseValue.getCostOfEmi();
         BigDecimal downPaymentCost = houseValue.getCostOfDownPayment();
         BigDecimal futureHouseValue = houseValue.getHouseValue();
-        BigDecimal costOfBuying = emiCost.add(downPaymentCost).subtract(futureHouseValue);
+        BigDecimal costOfMaintenance = houseValue.getCostOfMaintenance();
+        BigDecimal costOfBuying = emiCost.add(downPaymentCost).add(costOfMaintenance)
+                .subtract(futureHouseValue);
 
         txtBuyCost.setText(convertToCurrencyFormat(costOfBuying));
 
@@ -84,7 +86,7 @@ public class RentvsBuyResultFragment extends Fragment {
         }
 
         buyBreakup.setOnClickListener((o)->{
-            ShowBuyDetailsPopup(view, result.getTerm(), futureHouseValue, emiCost, downPaymentCost, costOfBuying);
+            ShowBuyDetailsPopup(view, result.getTerm(), futureHouseValue, emiCost, downPaymentCost, costOfMaintenance, costOfBuying);
         });
 
         rentBreakup.setOnClickListener((o)->{
@@ -102,10 +104,7 @@ public class RentvsBuyResultFragment extends Fragment {
             navController.navigate(action);
         });
 
-        Button disclaimer = view.findViewById(R.id.btnDisclaimer);
-        disclaimer.setOnClickListener(view1 -> {
-            FragmentHelper.showDisclaimerPopup(view, getActivity());
-        });
+        FragmentHelper.SetupFooterLinks(view, getActivity());
 
     }
 
@@ -113,7 +112,7 @@ public class RentvsBuyResultFragment extends Fragment {
                                      BigDecimal rentCost) {
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
-                Objects.requireNonNull(getActivity()).getSystemService(LAYOUT_INFLATER_SERVICE);
+                requireActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_rent, null);
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -143,10 +142,11 @@ public class RentvsBuyResultFragment extends Fragment {
 
 
     private void ShowBuyDetailsPopup(@NotNull View view, int term,
-                                     BigDecimal houseValue, BigDecimal costOfEmi, BigDecimal costOfDownPayment, BigDecimal netCost) {
+                                     BigDecimal houseValue, BigDecimal costOfEmi, BigDecimal costOfDownPayment,
+                                     BigDecimal costOfMaintenance, BigDecimal netCost) {
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
-                Objects.requireNonNull(getActivity()).getSystemService(LAYOUT_INFLATER_SERVICE);
+                requireActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_buy, null);
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -178,6 +178,9 @@ public class RentvsBuyResultFragment extends Fragment {
 
         TextView txtHouseValue = popupView.findViewById(R.id.txt_popup_house_value);
         txtHouseValue.setText(convertToCurrencyFormat(houseValue));
+
+        TextView txtMaintenanceValue = popupView.findViewById(R.id.txt_cost_of_maintenance);
+        txtMaintenanceValue.setText(convertToCurrencyFormat(costOfMaintenance));
 
         TextView txtNetCost = popupView.findViewById(R.id.txt_popup_net_cost_own);
         txtNetCost.setText(convertToCurrencyFormat(netCost));

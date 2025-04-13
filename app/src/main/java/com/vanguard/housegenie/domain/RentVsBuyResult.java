@@ -2,6 +2,7 @@ package com.vanguard.housegenie.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import androidx.annotation.NonNull;
 import com.vanguard.housegenie.analytics.HouseFutureValue;
 
 import java.math.BigDecimal;

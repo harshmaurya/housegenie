@@ -63,11 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -146,14 +141,7 @@
                 android:layout_gravity="center"
                 android:text="Home"/>
 
-            <Button
-                android:id="@+id/btnDisclaimer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click here for important disclaimer"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/border_bottom"/>
+            <include layout="@layout/footer" />
 
         </LinearLayout>
 

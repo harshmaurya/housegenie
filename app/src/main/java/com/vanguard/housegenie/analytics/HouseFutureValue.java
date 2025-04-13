@@ -10,18 +10,22 @@ public class HouseFutureValue implements Parcelable {
     private final BigDecimal houseValue;
     private final BigDecimal costOfEmi;
     private final BigDecimal costOfDownPayment;
+    private final BigDecimal costOfMaintenance;
 
-    public HouseFutureValue(BigDecimal houseValue, BigDecimal costOfEmi, BigDecimal costOfDownPayment){
+    public HouseFutureValue(BigDecimal houseValue, BigDecimal costOfEmi,
+                            BigDecimal costOfDownPayment, BigDecimal costOfMaintenance){
 
         this.houseValue = houseValue;
         this.costOfEmi = costOfEmi;
         this.costOfDownPayment = costOfDownPayment;
+        this.costOfMaintenance = costOfMaintenance;
     }
 
     protected HouseFutureValue(Parcel in) {
         this.houseValue = (BigDecimal) in.readSerializable();
         this.costOfEmi = (BigDecimal) in.readSerializable();;
-        this.costOfDownPayment = (BigDecimal) in.readSerializable();;
+        this.costOfDownPayment = (BigDecimal) in.readSerializable();
+        this.costOfMaintenance = (BigDecimal) in.readSerializable();
     }
 
     public static final Creator<HouseFutureValue> CREATOR = new Creator<HouseFutureValue>() {
@@ -48,6 +52,10 @@ public class HouseFutureValue implements Parcelable {
         return houseValue;
     }
 
+    public BigDecimal getCostOfMaintenance() {
+        return costOfMaintenance;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -58,5 +66,6 @@ public class HouseFutureValue implements Parcelable {
         dest.writeSerializable(houseValue);
         dest.writeSerializable(costOfEmi);
         dest.writeSerializable(costOfDownPayment);
+        dest.writeSerializable(costOfMaintenance);
     }
 }

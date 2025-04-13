@@ -16,7 +16,8 @@ public class RentValueCalculator {
         BigDecimal totalFutureValue = BigDecimal.valueOf(0);
         for (int i = 1; i <= years * months; i++) {
             int periods = i / months;
-            BigDecimal rent = (initialRent.multiply((BigDecimal.valueOf(1).add(rate)).pow(periods)));
+            //BigDecimal rent = (initialRent.multiply((BigDecimal.valueOf(1).add(rate)).pow(periods)));
+            BigDecimal rent = FinancialCalculator.futureValue(initialRent, rate, periods);
             double periodInYears = ((double)(years*months - i))/months;
             BigDecimal futureValueOfRent = FinancialCalculator.futureValue(rent, reinvestmentRate, periodInYears);
             totalFutureValue = totalFutureValue.add(futureValueOfRent);

@@ -60,6 +60,21 @@
 
             </LinearLayout>
 
+            <LinearLayout android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/popupMainText"
+                    android:text="Cost of maintenance: " />
+                <TextView android:textColor="@android:color/white"
+                    android:id="@+id/txt_cost_of_maintenance"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+            </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

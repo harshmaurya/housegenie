@@ -1,34 +1,31 @@
 package com.vanguard.housegenie.fragments;
+
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.fragment.NavHostFragment;
 import com.vanguard.housegenie.R;
 import com.vanguard.housegenie.contracts.RentVsRentvestingContract;
-import com.vanguard.housegenie.contracts.RentvsBuyContract;
 import com.vanguard.housegenie.domain.*;
-import com.vanguard.housegenie.presenters.RentVsBuyPresenter;
+import com.vanguard.housegenie.presenters.RentVsRentvestingPresenter;
+import com.vanguard.housegenie.utils.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
 import java.math.BigDecimal;
-import com.vanguard.housegenie.utils.*;
 
 import static com.vanguard.housegenie.analytics.FinancialCalculator.toFractionalRate;
 
-public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.View {
-
-    private final RentVsBuyPresenter presenter;
+public class RentVsRentvestingFragment extends Fragment implements RentVsRentvestingContract.View {
+    private final RentVsRentvestingPresenter presenter;
     private final int defaultTerm = 10;
 
-    public RentVsBuyFragment() {
-        presenter = new RentVsBuyPresenter(this);
+    public RentVsRentvestingFragment() {
+        presenter = new RentVsRentvestingPresenter(this);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.Vie
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rent_vs_buy, container, false);
+        return inflater.inflate(R.layout.fragment_rent_vs_rentvesting, container, false);
     }
 
     @Override
@@ -51,19 +48,19 @@ public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.Vie
         PurchaseDetailsFetcher purchaseDetailsFetcher = PurchaseDetailsFragment.SetupPurchaseView(view, getContext());
         Button rentvsBuy = view.findViewById(R.id.btnCalculate);
         rentvsBuy.setOnClickListener(view1 ->
-                {
-                    PurchaseDetails purchaseDetails = purchaseDetailsFetcher.getPurchaseDetails();
-                    RentParameters rentParameters = getRentParameters(view);
-                    ITaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
-                    BigDecimal inflationRate = getReInvestmentDetails(view);
-                    if(purchaseDetails==null || rentParameters==null || taxDetails ==null){
-                        showErrorMessage();
-                        return;
-                    }
-                    HouseBuyDetails houseValueDetails = new HouseBuyDetails(purchaseDetails.getDownPayment(), purchaseDetails.getLoanDetails()
-                            ,getHouseAppreciation(view), purchaseDetails.getMaintenance());
-                    presenter.calculate(new RentVsBuyArgs(houseValueDetails, rentParameters, taxDetails, inflationRate));
-                });
+        {
+            PurchaseDetails purchaseDetails = purchaseDetailsFetcher.getPurchaseDetails();
+            RentParameters rentParameters = getRentParameters(view);
+            ITaxDetails taxDetails = taxDetailsFetcher.getTaxDetails();
+            BigDecimal inflationRate = getReInvestmentDetails(view);
+            if(purchaseDetails==null || rentParameters==null || taxDetails ==null){
+                showErrorMessage();
+                return;
+            }
+            HouseBuyDetails houseValueDetails = new HouseBuyDetails(purchaseDetails.getDownPayment(), purchaseDetails.getLoanDetails()
+                    ,getHouseAppreciation(view), purchaseDetails.getMaintenance());
+            presenter.calculate(new RentVsRentvestingArgs());
+        });
     }
 
     private void showErrorMessage() {
@@ -107,10 +104,9 @@ public class RentVsBuyFragment extends Fragment implements RentvsBuyContract.Vie
         return toFractionalRate(appreciation);
     }
 
+
     @Override
-    public void showResult(RentVsBuyResult result) {
-        final NavController navController = NavHostFragment.findNavController(this);
-        final NavDirections action = RentVsBuyFragmentDirections.actionRentVsBuyFragmentToBuyVsRentResultFragment(result);
-        navController.navigate(action);
+    public void showResult(RentvsRentvestingResult result) {
+        
     }
 }

@@ -88,11 +88,7 @@ public class HouseValueResultFragment extends Fragment {
             navController.navigate(action);
         });
 
-        Button disclaimer = view.findViewById(R.id.btnDisclaimer);
-        disclaimer.setOnClickListener(view1 -> {
-            FragmentHelper.showDisclaimerPopup(view, getActivity());
-        });
-
+        FragmentHelper.SetupFooterLinks(view, getActivity());
     }
 
 
@@ -125,7 +121,7 @@ public class HouseValueResultFragment extends Fragment {
     private View showPopup(@NotNull View view) {
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
-                Objects.requireNonNull(getActivity()).getSystemService(LAYOUT_INFLATER_SERVICE);
+                requireActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_investment, null);
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;

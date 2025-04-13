@@ -47,11 +47,12 @@
             <EditText
                 android:id="@+id/txtCashDownPayment"
                 style="@style/modifiedEditText"
-                android:hint="Purchase price"
+                android:hint="@string/input_cash_payment"
                 android:singleLine="true"
                 android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
     </FrameLayout>
@@ -127,5 +128,20 @@
 
         </LinearLayout>
     </FrameLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/txtMaintenance"
+            style="@style/modifiedEditText"
+            android:hint="@string/input_maintenance"
+            android:singleLine="true"
+            android:inputType="number"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

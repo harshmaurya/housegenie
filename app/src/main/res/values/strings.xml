@@ -9,11 +9,15 @@
     <string name="mobno">Mobile No.</string>
     <string name="reg_no">Reg</string>
     <string name="buy_vs_rent_calculator">Buy vs Rent Calculator</string>
+    <string name="rentvesting_calculator">Rent vs Rentvesting Calculator</string>
     <string name="house_value_description">Use this tool to calculate the returns from your existing house investment</string>
     <string name="buy_vs_rent_description">Use this tool to calculate whether it is profitable to rent a house for yourself or should you take a loan and buy instead</string>
     <string name="loan_details">Loan Details</string>
     <string name="buy_home_scenario">Enter details for home buy scenario</string>
-    <string name="input_down_payment">Down Payment Amount</string>
+    <string name="self_living_scenario">Enter details for self living scenario</string>
+    <string name="input_down_payment">Down Payment Amount (including stamp duty etc.)</string>
+    <string name="input_cash_payment">Purchase price (including stamp duty etc.)</string>
+    <string name="input_maintenance">Annual Maintenance costs (tax, insurance, repairs etc.)</string>
     <string name="input_loan_principal">Loan Amount</string>
     <string name="buy_more_profitable">Buying a house is more profitable in this case since the cost of buying is less than cost of renting</string>
     <string name="rent_more_profitable">Renting a house is more profitable in this case since the cost of renting is less than cost of buying</string>
@@ -36,7 +40,7 @@
         I will not take responsibility for any loss occurred due to usage of this app.
     </string>
     <string name="house_return_explanation">To calculate XIRR from the house investment, below factors are considered:
-        \n\n- Expected annual appreciation of the house.
+        \n\n- Expected annual appreciation of the house
         \n\n- Loan interest rate
         \n\n- Rental income
         \n\n- Tax savings from loan interest payments
@@ -65,11 +69,18 @@
     <string name="equity_fund">Equity Fund</string>
     <string name="debt_fund">Debt Fund</string>
     <string name="others">Others</string>
+    <string name="copyright">SASHA BVN HANDMADE PRODUCTS LLP</string>
     <string name="rent_buy_intro">Are you living on rent? Do you want to check if it is profitable to continue in rent
     or buying a house is more beneficial?</string>
+    <string name="rent_vesting_intro">Check if it is better to buy a house and live yourself in it, or do rent vesting instead
+        (rent out your property and continue renting in another place yourself)</string>
     <string name="house_vs_others_into">Do you plan to invest in property but not sure if it will fetch better returns than
     other investment categories? Find out here</string>
     <string name="house_value_intro">Do you have an existing property and want to calculate the returns it has given till now?
     Check it out here</string>
+    <string name="inflation_rate">Inflation rate (%)</string>
+    <string name="india_marginal_tax">30</string>
+    <string name="australia_marginal_tax">47</string>
+    <string name="india_interest_cap">200000</string>
 
 </resources>

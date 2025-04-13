@@ -18,6 +18,18 @@
         <action
             android:id="@+id/action_homeFragment_to_houseValueFragment"
             app:destination="@id/houseValueFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_rentvestingFragment"
+            app:destination="@id/rentVsRentvestingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rentVsRentvestingFragment"
+        android:name="com.vanguard.housegenie.fragments.RentVsRentvestingFragment"
+        android:label="fragment_rent_vs_rentvesting"
+        tools:layout="@layout/fragment_rent_vs_rentvesting" >
+        <action
+            android:id="@+id/action_rentVsBuyFragment_to_buyVsRentResultFragment"
+            app:destination="@id/rentVsRentvestingResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/rentVsBuyFragment"
@@ -38,6 +50,20 @@
             app:argType="com.vanguard.housegenie.domain.RentVsBuyResult" />
         <action
             android:id="@+id/action_buyVsRentResultFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/rentVsRentvestingResultFragment"
+        android:name="com.vanguard.housegenie.fragments.RentVsRentvestingFragment"
+        android:label="fragment_rent_vs_rentVesting_result"
+        tools:layout="@layout/fragment_rent_vs_rentvesting_result" >
+        <argument
+            android:name="rentVsRentvestingResultArgs"
+            app:argType="com.vanguard.housegenie.domain.RentvsRentvestingResult" />
+        <action
+            android:id="@+id/action_rentVsRentVestingResultFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
