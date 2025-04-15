@@ -11,8 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            android:versionCode="26"
-            android:versionName="1.0026">
+            android:versionCode="27"
+            android:versionName="1.0027">
         <activity android:name=".activities.MainActivity" android:label="@string/app_name" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
