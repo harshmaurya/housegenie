@@ -46,8 +46,7 @@
         \n\n- Tax savings from loan interest payments
         \n\nThe derivation of annualized return (XIRR) involves complex mathematical calculations.
     </string>
-    <string name="investment_return_explanation">The rate of return from the other investment is already approximated using
-        which the future value is calculated. This can be compared directly with the returns from house investment
+    <string name="investment_return_explanation">The rate of return is used to calculate the future value of investment. This can be compared directly with the returns from house investment
     </string>
     <string name="cost_of_rent_explanation">Cost of rent is calculated by adding all the future values of rent payments over a reference period.
         \n\nCost of rent = Future value of all the rent payments
